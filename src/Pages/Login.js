@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import SubmitButton from "../components/SubmitButton";
-import SignupButton from "../components/SignupButton";
 import "../Style/styles.css";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Login = () =>  {
     // React States
@@ -54,6 +56,55 @@ const Login = () =>  {
       name === errorMessages.name && (
         <div className="error">{errorMessages.message}</div>
       );
+
+      const MyVerticallyCenteredModal=(props) =>{
+        return (
+          <Modal
+            {...props}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Sign Up
+                <h6>Quick and easy</h6>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <form>
+            <div class="input-group">
+              <input type="text" className="form-control" placeholder="First name"/>
+              <input type="text" className="form-control" placeholder="Last name" />
+            </div>
+            <div className="mb-3">
+            </div>
+            <div className="mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Email"
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter password"
+              />
+            </div>
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary" style={{background:"#2c9ad9", border:"#2c9ad9"}}>
+                Sign Up
+              </button>
+            </div>
+            <p className="forgot-password text-right">
+              Already registered <a href="/login">sign in?</a>
+            </p>
+          </form>
+            </Modal.Body>
+          </Modal>
+        );
+      }
   
     // JSX code for login form
     const renderForm = (
@@ -69,16 +120,20 @@ const Login = () =>  {
             <input type="password" name="pass" required />
             {renderErrorMessage("pass")}
           </div>
-          <SubmitButton/>
+          <Button as="input" type="submit" value="Login" />{' '}
           <div className="forgotPassword">
             <a href="aaa.html">Forgot Password?</a>
           </div>
-          <SignupButton style={{textAlign: 'center', top:'100px'}}/>
+          <br/>
+          <div class="col-md-12 text-center">
+            <Button variant="primary" style={{background:"#2c9ad9", border:"#2c9ad9"}} onClick={() => setModalShow(true)}>Sign Up</Button>
+          </div>
         </form>
       </div>
     );
     
     let history = useHistory();
+    const [modalShow, setModalShow] = React.useState(false);
     return (
         <div className="app">
             <div className="slogan">
@@ -88,6 +143,7 @@ const Login = () =>  {
             <div className="login-form">
                 {isSubmitted ? history.push("/homepage"): renderForm}
             </div>
+            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)}/>
         </div>
     );
 }
