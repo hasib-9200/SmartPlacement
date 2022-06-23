@@ -47,12 +47,13 @@
   .login-form {
     position: absolute;
     width: 400px;
-    height:400px;
+    height:320px;
     border-radius: 10px;
     background-color: white;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     top: 4rem;
+    right: 20%;
   }
   
   .list-container {
@@ -77,7 +78,7 @@
     margin: 10px;
   }
 
-  .signupButton>button{
+  .signupButton{
     margin-top: 50px;
     cursor: pointer;
     font-size: 15px;
@@ -87,15 +88,16 @@
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
+
   }
 
-  .signupButton>button:hover{
+  .signupButton:hover{
     background: #5095c9;
   }
 
   .forgotPassword>a{
     font-size: 17px;
-    color: #287099;
+    color: #008acf;
     position: relative;
     left:33%;
     top:10px;
@@ -104,4 +106,22 @@
 
   .forgotPassword>a:hover{
       text-decoration: underline;
+  }
+
+  .slogan{
+    position: absolute;
+    left: 20%;
+    top:20%;
+  }
+
+  .sloganTitle{
+    color: #2c9ad9;
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  .sloganStatement{
+    position: absolute;
+    bottom: -40px;
+    font-size: 25px;
   }

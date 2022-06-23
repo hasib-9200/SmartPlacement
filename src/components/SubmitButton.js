@@ -1,7 +1,7 @@
 const SubmitButton = () => {
   return (
     <div className="button-container">
-      <input type="submit" />
+      <input type="submit" value="Login"/>
     </div>
   )
 }
