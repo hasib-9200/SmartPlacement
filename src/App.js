@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "./a/ForgotPassword";
 import Navbar from './components/navbar/navbar'
-import LoginPage from "./pages/login_page/login_page";
-import HomePage from "./pages/home_page/home_page";
-import ClockInPage from "./pages/clock_in_page/clock_in_page";
+import LoginPage from "./a/login_page/login_page";
+import HomePage from "./a/home_page/home_page";
+import ClockInPage from "./a/clock_in_page/clock_in_page";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
