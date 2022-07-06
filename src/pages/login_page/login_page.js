@@ -57,6 +57,8 @@ function LoginPage({ login }) {
                                         console.log(error)
                                     }
                                 }}>Login</button>
+                            <br />
+                            <br />
                         </form>
                     </div>
                 </div>
