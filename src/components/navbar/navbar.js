@@ -48,7 +48,7 @@ function Navbar({ currentUser, logout }) {
                     </li>
                 </ul>
             ) : (
-                <ul className="navbar-nav me-auto">
+                <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
                         <Link to={"/"} className="nav-link">
                             Login
