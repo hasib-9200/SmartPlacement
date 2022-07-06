@@ -53,11 +53,11 @@ function Navbar({ currentUser, logout }) {
                 </ul>
             ) : (
                 <ul className="navbar-nav ms-auto">
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to={"/home"} className={history.location.pathname == "/home" ? "nav-link active" : "nav-link"}>
                             Home
                         </Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                         <Link to={"/"} className={history.location.pathname == "/" ? "nav-link active" : "nav-link"}>
                             Login

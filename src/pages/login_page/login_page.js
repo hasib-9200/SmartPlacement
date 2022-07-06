@@ -17,6 +17,14 @@ function LoginPage({ login }) {
         setPassword(event.target.value)
     }
 
+    var onSubmit = async () => {
+        try {
+            await login(email, password)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className='container'>
             <div className="row justify-content-md-right" style={{ marginTop: window.innerHeight * 0.2 }}>
@@ -30,13 +38,7 @@ function LoginPage({ login }) {
 
                 <div className="col-sm-12 col-md-4 col-lg-5">
                     <div className="card mt-5 p-4 pb-4" style={{ borderRadius: "15px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
-                        <form action='/home' onSubmit={async () => {
-                            try {
-                                await login(email, password)
-                            } catch (error) {
-                                console.log(error)
-                            }
-                        }}>
+                        <form action='/home' onSubmit={onSubmit}>
                             <div className='pb-4' style={{ textAlign: "center" }}>
                                 <a style={{ fontSize: "30px" }}>Sign In</a>
                             </div>
