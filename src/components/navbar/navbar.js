@@ -1,48 +1,52 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import AuthApi from '../../apis/auth_api/auth_api'
 
 function Navbar({ currentUser, logout }) {
+    const history = useHistory()
+
     return (
         <nav className="navbar sticky-top navbar-expand navbar-dark bg-primary">
             <Link to={"/"} style={{ marginLeft: "10px" }} className="navbar-brand me-auto">
-                SmartPlacement
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                </svg> SmartPlacement
             </Link>
             {currentUser ? (
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                        <Link to={"/home"} className="nav-link">
+                        <Link to={"/home"} className={history.location.pathname == "/home" ? "nav-link active" : "nav-link"} >
                             Home
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/home"} className="nav-link">
+                        <Link to={"/status"} className={history.location.pathname == "/status" ? "nav-link active" : "nav-link"}>
                             Status
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/home"} className="nav-link">
+                        <Link to={"/requirements"} className={history.location.pathname == "/requirements" ? "nav-link active" : "nav-link"}>
                             Requiurements
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/home"} className="nav-link">
+                        <Link to={"/records"} className={history.location.pathname == "/records" ? "nav-link active" : "nav-link"}>
                             Records
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/home"} className="nav-link">
+                        <Link to={"/attachments"} className={history.location.pathname == "/attachments" ? "nav-link active" : "nav-link"}>
                             Attachments
                         </Link>
                     </li>
 
-                    <li className="nav-item">
-                        <Link to={"/home"} className="nav-link">
+                    {/* <li className="nav-item">
+                        <Link to={"/home"} className={history.location.pathname == "/home" ? "nav-link active": "nav-link"}>
                             {currentUser.username}
                         </Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
-                        <a href="/" className="nav-link" onClick={logout}>
+                        <a href="/" className={history.location.pathname == "/" ? "nav-link active" : "nav-link"} onClick={logout}>
                             Logout
                         </a>
                     </li>
@@ -50,7 +54,12 @@ function Navbar({ currentUser, logout }) {
             ) : (
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                        <Link to={"/"} className="nav-link">
+                        <Link to={"/home"} className={history.location.pathname == "/home" ? "nav-link active" : "nav-link"}>
+                            Home
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/"} className={history.location.pathname == "/" ? "nav-link active" : "nav-link"}>
                             Login
                         </Link>
                     </li>

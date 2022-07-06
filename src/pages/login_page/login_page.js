@@ -32,7 +32,13 @@ function LoginPage({ login }) {
                     <div className="card" style={{
                         padding: "35px", borderRadius: "15px", marginTop: "50px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
                     }}>
-                        <form>
+                        <form action='/home' onSubmit={async () => {
+                            try {
+                                await login(email, password)
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        }}>
                             <div style={{ textAlign: "center", paddingBottom: "20px" }}>
                                 <a style={{ fontSize: "30px" }}>Sign In</a>
                             </div>
@@ -47,15 +53,7 @@ function LoginPage({ login }) {
                                 <input onChange={handlePassword} type="password" className="form-control" id="password" placeholder="Password" />
                             </div>
                             <br />
-                            <button style={{ width: "100%" }} type="submit" className="btn btn-primary"
-                                onClick={async () => {
-                                    try {
-                                        await login(email, password)
-                                        history.push("/home")
-                                    } catch (error) {
-                                        console.log(error)
-                                    }
-                                }}>Login</button>
+                            <button style={{ width: "100%" }} type="submit" className="btn btn-primary">Login</button>
                             <br />
                             <br />
                         </form>
