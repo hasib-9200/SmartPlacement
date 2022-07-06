@@ -14,23 +14,23 @@ function HomePage({ currentUser }) {
             <div className='container'>
                 <div className="row">
                     <div className="col-sm-6 col-md-5 col-lg-5">
-                        <div className="card">
+                        <div className="card" style={{ borderRadius: "15px" }}>
                             <div className="card-body">
                                 <h5 className="card-title">Required Tasks</h5>
                                 <p className="card-text">Complete all of the tasks before the deadline.</p>
-                                <button type="button" className="btn btn-primary">
-                                    To Do <span className="badge text-bg-secondary">2</span>
+                                <button type="button" className="btn btn-primary" style={{ borderRadius: "15px" }}> To Do
+                                    <span className="badge text-bg-secondary">2</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-6 col-md-5 col-lg-5">
-                        <div className="card">
+                        <div className="card" style={{ borderRadius: "15px" }}>
                             <div className="card-body">
                                 <h5 className="card-title">Pending Notifications</h5>
                                 <p className="card-text">Review all of the pending notifications below.</p>
-                                <button type="button" className="btn btn-primary">
-                                    Notifications <span className="badge text-bg-secondary">4</span>
+                                <button type="button" className="btn btn-primary" style={{ borderRadius: "15px" }}> Notifications
+                                    <span className="badge text-bg-secondary">4</span>
                                 </button>
                             </div>
                         </div>
