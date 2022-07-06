@@ -5,6 +5,7 @@ import Navbar from './components/navbar/navbar'
 import LoginPage from "./pages/login_page/login_page";
 import HomePage from "./pages/home_page/home_page";
 import ClockInPage from "./pages/clock_in_page/clock_in_page";
+import AuthApi from "./apis/auth_api/auth_api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -16,20 +17,21 @@ function App() {
   //   }
   // }, []);
 
-  var login = (username, password) => {
-    let user = { username: username, password: password }
-    localStorage.setItem("user", JSON.stringify(user))
-    setCurrentUser(user)
+  var login = async (username, password) => {
+    let data = await AuthApi.login(username, password)
+    setCurrentUser(data.user)
   }
 
-  var logout = async () => {
-    localStorage.removeItem("user")
+  var logout = () => {
+    AuthApi.logout()
     setCurrentUser(null)
   }
 
   useEffect(() => {
-    var user = localStorage.getItem("user")
-    setCurrentUser(JSON.parse(user))
+    if (!user) {
+      var user = localStorage.getItem("user")
+      setCurrentUser(JSON.parse(user))
+    }
   })
 
 

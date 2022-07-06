@@ -13,7 +13,6 @@ function LoginPage({ login }) {
         setEmail(event.target.value)
     }
 
-
     var handlePassword = (event) => {
         setPassword(event.target.value)
     }
