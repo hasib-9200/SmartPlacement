@@ -9,15 +9,15 @@ function Navbar({ currentUser, logout }) {
                 SmartPlacement
             </Link>
 
-            <div className="navbar-nav mr-auto">
+            <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <Link to={"/home"} className="nav-link">
                         Home
                     </Link>
                 </li>
-            </div>
+            </ul>
             {currentUser ? (
-                <div className="navbar-nav mr-auto">
+                <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">
                             Status
@@ -49,15 +49,15 @@ function Navbar({ currentUser, logout }) {
                             LogOut
                         </a>
                     </li>
-                </div>
+                </ul>
             ) : (
-                <div className="navbar-nav ml-auto">
+                <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                         <Link to={"/"} className="nav-link">
                             Login
                         </Link>
                     </li>
-                </div>
+                </ul>
             )}
         </nav>)
 }
