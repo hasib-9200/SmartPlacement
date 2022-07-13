@@ -4,6 +4,7 @@ import SignupModal from "./SignupModal";
 import "../Style/styles.css";
 import { Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Axios from "axios"
 
 // import linq from "linq";
 // import Enumerable from "linq";
@@ -20,6 +21,8 @@ export let database = [
 
 
 
+
+
 const Login = () =>  {
     // React States
 
@@ -27,35 +30,33 @@ const Login = () =>  {
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [modalShow, setModalShow] = useState(false);
-    let history = useHistory();
+    const [loginStatus, setLoginStatus] = useState("");
+    const [username, setUserName] = useState([]);
+    const [password, setPassword] = useState([]);
+    // let history = useHistory();
     // User Login info
     const errors = {
-      uname: "invalid username",
-      pass: "invalid password"
+      pass: "invalid username or password"
     };
-    const handleSubmit = (event) => {
-      //Prevent page reload
-      event.preventDefault();
-  
-      var { uname, pass } = document.forms[0];
-  
-      // Find user login info
-      const userData = database.find((user) => user.username === uname.value);
-  
-      // Compare user info
-      if (userData) {
-        if (userData.password !== pass.value) {
-          // Invalid password
-          setErrorMessages({ name: "pass", message: errors.pass });
-        } else {
-          setIsSubmitted(true);
-          localStorage.setItem("isSubmitted", true);
-        }
-      } else {
-        // Username not found
-        setErrorMessages({ name: "uname", message: errors.uname });
+
+  const loginUser=(event)=>{
+    event.preventDefault();
+    Axios.post("http://localhost:3001/login",{
+      username:username, 
+      password:password
+    }).then((response)=>{
+      if(response.data.message){
+        setIsSubmitted(false);
+        localStorage.setItem("isSubmitted", false);
+        setErrorMessages({ name: "pass", message: errors.pass });
+      } else{
+        setIsSubmitted(true);
+        localStorage.setItem("isSubmitted", true);
+        window.location.href = '/Homepage';
       }
-    };
+    });
+};
+
   
     // Generate JSX code for error message
     const renderErrorMessage = (name) =>
@@ -68,15 +69,20 @@ const Login = () =>  {
     // JSX code for login form
     const renderForm = (
       <div className="form">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={loginUser}>
           <div className="input-container">
             <label>Username </label>
-            <input type="email" name="uname" required />
+            <input type="email" name="uname" required onChange={(e)=>{
+              setUserName(e.target.value);
+            }}/>
             {renderErrorMessage("uname")}
           </div>
           <div className="input-container">
             <label>Password </label>
-            <input type="password" name="pass" required />
+            <input type="password" name="pass" required
+            onChange={(e)=>{
+              setPassword(e.target.value);
+            }}/>
             {renderErrorMessage("pass")}
           </div>
           <Button variant="primary" as="input" type="submit" value="Login" />{' '}
@@ -97,9 +103,10 @@ const Login = () =>  {
               <div className="sloganStatement">We help you with all your placement needs. </div>
           </div>
           <div className="flex-item login-form">
-              {isSubmitted ? history.push("/homepage"): renderForm}
+              {renderForm}
           </div>
           <SignupModal show={modalShow} onHide={() => setModalShow(false)}/>
+          <div>{loginStatus}</div>
         </div>
     );
 }

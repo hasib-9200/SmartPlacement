@@ -7,28 +7,22 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    // user:'root',
-    // host:'localhost',
-    // password: '123456789',
-    // database:'smartplacement'
-    user:'azure',
-    host:'127.0.0.1',
-    password: '6#vWHD_$',
-    database:'localdb'
+    user:'anmstha',
+    host:'spdatabaseserver.mysql.database.azure.com',
+    password: 'SmartPlacement1',
+    database:'sp_database',
+    ssl: true
 });
 
 app.post('/register',(req,res)=>{
     console.log(req.body);
-    // const username = req.body.username;
-    // const password = req.body.password;
-    const username = req.body.password;
-    const password = req.body.password;
-    const access = 1;
-    const fname = "Anmol";
-    const lname = "Shrestha";
+    const username = req.body.username;
+    const user_password = req.body.password;  
+    const access_lvl = req.body.accessLevel;
+    const f_name = req.body.firstName;
+    const l_name = req.body.lastName;
 
-
-    db.query('INSERT INTO sp_user(username, password) VALUES (?,?)',[username, password,access,fname,lname],(err, result)=>{
+    db.query('INSERT INTO sp_user(username,user_password,access_lvl,f_name,l_name) VALUES (?,?,?,?,?)',[username, user_password,access_lvl,f_name,l_name],(err, result)=>{
         if(err){
             console.log(err);
         }else{
@@ -36,6 +30,38 @@ app.post('/register',(req,res)=>{
         }
     })
 })
+
+app.post('/login',(req,res)=>{
+    const username = req.body.username;
+    const user_password = req.body.password;  
+
+    db.query("SELECT * FROM sp_user WHERE username = ? AND user_password= ?",[username, user_password],(err, result)=>{
+        if(err){
+            res.send({err:err});
+        }
+        if(result.length > 0){
+            res.send(result);
+        } else{
+            res.send({message: "Wrong username/ password"});
+        }
+    })
+});
+
+app.post('/finduser',(req,res)=>{
+    const username = req.body.username;
+    console.log(username);
+
+    db.query("SELECT * FROM login WHERE username = ? ",[username],(err, result)=>{
+        if(err){
+            res.send({err:err});
+        }
+        if(result.length>0){
+            res.send(result);
+        } else{
+            res.send({message: "Wrong username"});
+        }
+    })
+});
 
 app.listen(3001,()=>{
     console.log("testing the server");
