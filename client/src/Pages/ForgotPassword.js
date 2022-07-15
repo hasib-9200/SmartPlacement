@@ -32,21 +32,35 @@ const ForgotPassword = () => {
 
 
     const [username, setUserName] = useState([]);
-    const [notError, setNotError] = useState(true);
-
-
+    const [password, setPassword] = useState([]);
+    const [error, setError] = useState(false);
+    
   const loginUser=(event)=>{
     event.preventDefault();
     Axios.post("http://localhost:3001/finduser",{
-      username:username, 
+      username:username
     }).then((response)=>{
       if(response.data.message){
-        setNotError(true);
+        console.log(response.data.message);
+        setError(false);
       } else{
-          console.log(response);
-        setNotError(false);
+          setError(true);
       }
     });
+};
+const changePassword=(event)=>{
+  event.preventDefault();
+  Axios.post("http://localhost:3001/changePassword",{
+    username:username,
+    password:password
+  }).then((response)=>{
+    if(response.data.message){
+      console.log(response.data.message);
+      setError(false);
+    } else{
+        setError(true);
+    }
+  });
 };
 
 const renderForm = (
@@ -59,7 +73,9 @@ const renderForm = (
             <Form.Control type="email" placeholder="Email" onChange={(e)=>{
           setUserName(e.target.value);}}/>
         </Form.Group>
-        <div>{notError}</div>
+        <div >
+          {!error?"":"User not Found"}
+        </div>
         <Button variant="primary" onClick={cancle}>
             Cancle
         </Button> {' '}
@@ -72,13 +88,14 @@ const renderForm = (
 
 const renderSearch = (
     <div className="form" style={formStyleSearch}>
-    <Form>
+    <Form onSubmit={changePassword}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label style={{fontWeight:'bold', fontSize:'20px'}}>Find Your Account</Form.Label>
             <br/>
             <p>Please enter your new password</p>
-            <Form.Control type="text" placeholder="New Password" value=""/>
-            <Form.Control style={{marginTop:"10px"}} type="text" placeholder="Confirm Password" value=""/>
+            <Form.Control type="text" placeholder="New Password"  onChange={(e)=>{
+          setPassword(e.target.value);}}/>
+            <Form.Control style={{marginTop:"10px"}} type="text" placeholder="Confirm Password" />
         </Form.Group>
         <Button variant="primary" onClick={cancle}>
             Cancle
@@ -95,7 +112,7 @@ const renderSearch = (
   return (
     <div className="app">
         <div>
-            {notError? renderForm: renderSearch}
+            {!error ?renderForm:renderSearch}
         </div>
     </div>
 

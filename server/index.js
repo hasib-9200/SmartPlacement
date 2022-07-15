@@ -1,12 +1,10 @@
 const express = require('express');
-const path = require("path");
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 const db = mysql.createConnection({
     user:'anmstha',
@@ -59,12 +57,31 @@ app.post('/finduser',(req,res)=>{
         }
         if(result.length>0){
             res.send(result);
+            console.log("anmol");
         } else{
             res.send({message: "Wrong username"});
         }
     })
 });
 
-app.listen(8080,()=>{
+
+app.post('/changePassword',(req,res)=>{
+    const username = req.body.username;
+    const user_password = req.body.password;  
+    console.log(user_password);
+    db.query("UPDATE sp_user SET user_passowrd=? WHERE username = ? ",[user_password,username],(err, result)=>{
+        if(err){
+            res.send({err:err});
+        }
+        if(result){
+            res.send(result);
+            console.log("anmol");
+        } else{
+            res.send({message: "Wrong username"});
+        }
+    })
+});
+
+app.listen(3001,()=>{
     console.log("testing the server");
 })
