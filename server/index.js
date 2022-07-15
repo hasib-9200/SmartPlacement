@@ -1,12 +1,10 @@
 const express = require('express');
-const path = require("path");
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 const db = mysql.createConnection({
     user:'anmstha',
@@ -53,7 +51,7 @@ app.post('/finduser',(req,res)=>{
     const username = req.body.username;
     console.log(username);
 
-    db.query("SELECT * FROM sp_user WHERE username = ? ",[username],(err, result)=>{
+    db.query("SELECT * FROM login WHERE username = ? ",[username],(err, result)=>{
         if(err){
             res.send({err:err});
         }
@@ -65,6 +63,6 @@ app.post('/finduser',(req,res)=>{
     })
 });
 
-app.listen(8080,()=>{
+app.listen(3001,()=>{
     console.log("testing the server");
 })
