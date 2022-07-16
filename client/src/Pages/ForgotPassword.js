@@ -50,28 +50,6 @@ const renderForm = (
 </div>
 );
 
-const renderSearch = (
-    <div className="form" style={formStyleSearch}>
-    <Form onSubmit={changePassword}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label style={{fontWeight:'bold', fontSize:'20px'}}>Find Your Account</Form.Label>
-            <br/>
-            <p>Please enter your new password</p>
-            <Form.Control type="text" placeholder="New Password"/>
-            <Form.Control style={{marginTop:"10px"}} type="text" placeholder="Confirm Password" />
-        </Form.Group>
-        <Button variant="primary" onClick={cancle}>
-            Cancle
-        </Button> {' '}
-        <Button variant="primary" type="submit">
-            Submit
-        </Button>
-    </Form>
-</div>
-
-);
-
-
   return (
     <div className="app">
         <div>
