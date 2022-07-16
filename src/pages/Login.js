@@ -5,7 +5,7 @@ import "../Style/styles.css";
 import { Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-var mysql = require('mysql')
+/*var mysql = require('mysql')
 var connection = mysql.createConnection({
 host     : 'spdatabaseserver.mysql.database.azure.com',
 user     : 'mstokes99',
@@ -18,6 +18,26 @@ connection.connect()
 connection.query('INSERT INTO sp_user (username, user_password, access_lvl, f_name, l_name) VALUES (test@gmail.com, test, 1, test, test);', function (err, rows, fields) {
 if (err) throw err
 })
+
+connection.end()
+*/
+
+const mysql = require('mysql');
+
+const con = mysql.createConnection({
+host     : 'spdatabaseserver.mysql.database.azure.com',
+user     : 'mstokes99',
+password : 'SmartPlacement1',
+database : 'sp_database'
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("INSERT INTO sp_user (username, user_password, access_lvl, f_name, l_name) VALUES ('test@gmail.com', 'test', 1, 'test', 'test');", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
 
 connection.end()
 
