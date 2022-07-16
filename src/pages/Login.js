@@ -4,6 +4,25 @@ import SignupModal from "./SignupModal";
 import "../Style/styles.css";
 import { Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+host     : 'spdatabaseserver.mysql.database.azure.com',
+user     : 'mstokes99',
+password : 'SmartPlacement1',
+database : 'sp_database'
+});
+
+connection.connect()
+
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+if (err) throw err
+
+console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
+
 export let database = [
   {
     username: "name",
