@@ -11,26 +11,7 @@ const SignupModal = (props) => {
     const hoverStop=(e)=> {
         e.target.style.background = '#0d6efd';
       }
-
-      const [firstName, setFirstName]=useState("");
-      const [lastName, setLastName]=useState("");
-      const [username, setUserName]=useState("");
-      const [password, setPassword]=useState("");
-      const [accessLevel, setAccessLevel] = useState("1");
-
-      const addUsers=()=>{
-        
-          Axios.post("http://localhost:3001/register",{
-              firstName:firstName,
-              lastName:lastName,
-              username:username, 
-              password:password,
-              accessLevel:accessLevel
-            }).then((response)=>{
-                console.log(response);
-            });
-      };        
-
+       
     return (
         <Modal
         {...props}
@@ -46,12 +27,8 @@ const SignupModal = (props) => {
         <Modal.Body>
         <form>
         <div class="input-group">
-            <input type="text" className="form-control" placeholder="First name" onChange={(event)=>{
-                setFirstName(event.target.value);
-            }}/>
-            <input type="text" className="form-control" placeholder="Last name" onChange={(event)=>{
-                setLastName(event.target.value);
-            }}/>
+            <input type="text" className="form-control" placeholder="First name"/>
+            <input type="text" className="form-control" placeholder="Last name"/>
         </div>
         <div className="mb-3">
         </div>
@@ -59,19 +36,13 @@ const SignupModal = (props) => {
             <input
             type="email"
             className="form-control"
-            placeholder="Email"
-            onChange={(event)=>{
-                setUserName(event.target.value);
-            }}/>
+            placeholder="Email"/>
         </div>
         <div className="mb-3">
             <input
             type="password"
             className="form-control"
-            placeholder="Enter password"
-            onChange={(event)=>{
-                setPassword(event.target.value);
-            }}/>
+            placeholder="Enter password"/>
         </div>
 
         <Form.Select onChange={(event) => setAccessLevel(event.target.value)}>
