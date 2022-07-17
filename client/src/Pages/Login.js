@@ -4,7 +4,7 @@ import SignupModal from "./SignupModal";
 import "../Style/styles.css";
 import { Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Axios from "axios"
+import Axios from "axios";
 
 // import linq from "linq";
 // import Enumerable from "linq";
@@ -31,13 +31,31 @@ const Login = () =>  {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [modalShow, setModalShow] = useState(false);
     const [loginStatus, setLoginStatus] = useState("");
+    const [username, setUserName] = useState([]);
+    const [password, setPassword] = useState([]);
     // let history = useHistory();
     // User Login info
     const errors = {
       pass: "invalid username or password"
     };
 
-
+  const loginUser=(event)=>{
+    event.preventDefault();
+    Axios.post("/login",{
+      username:username, 
+      password:password
+    }).then((response)=>{
+      if(response.data.message){
+        setIsSubmitted(false);
+        localStorage.setItem("isSubmitted", false);
+        setErrorMessages({ name: "pass", message: errors.pass });
+      } else{
+        setIsSubmitted(true);
+        localStorage.setItem("isSubmitted", true);
+        window.location.href = '/Homepage';
+      }
+    });
+};
 
   
     // Generate JSX code for error message
@@ -54,12 +72,17 @@ const Login = () =>  {
         <form onSubmit={loginUser}>
           <div className="input-container">
             <label>Username </label>
-            <input type="email" name="uname" required/>
+            <input type="email" name="uname" required onChange={(e)=>{
+              setUserName(e.target.value);
+            }}/>
             {renderErrorMessage("uname")}
           </div>
           <div className="input-container">
             <label>Password </label>
-            <input type="password" name="pass" required/>
+            <input type="password" name="pass" required
+            onChange={(e)=>{
+              setPassword(e.target.value);
+            }}/>
             {renderErrorMessage("pass")}
           </div>
           <Button variant="primary" as="input" type="submit" value="Login" />{' '}
