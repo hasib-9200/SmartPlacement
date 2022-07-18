@@ -13,7 +13,7 @@ app.get('*', (req,res) =>{
 });
 
 const db = mysql.createConnection({
-    user:'anmstha',
+    user:'mstokes99',
     host:'spdatabaseserver.mysql.database.azure.com',
     password: 'SmartPlacement1',
     database:'sp_database',
