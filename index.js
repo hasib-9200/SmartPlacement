@@ -27,7 +27,7 @@ app.post('/register',(req,res)=>{
     const f_name = req.body.firstName;
     const l_name = req.body.lastName;
 
-    db.query('INSERT INTO sp_user(username,user_password,access_lvl,f_name,l_name) VALUES (?,?,?,?,?)',[username, user_password,access_lvl,f_name,l_name],(err, result)=>{
+    db.query('CALL create_user(?, ?, ?, ?, ?)',[username, user_password,access_lvl,f_name,l_name],(err, result)=>{
         if(err){
             console.log(err);
         }else{
