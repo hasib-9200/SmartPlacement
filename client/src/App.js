@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./Pages/Login";
-import Homepage from "./Pages/Homepage";
+import StudentHomepage from "./Pages/StudentHomepage";
 import ForgotPassword from "./Pages/ForgotPassword";
 
 
@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component = {Login}/>
-        <Route exact path="/homepage" component = {Homepage}/>
+        <Route exact path="/StudentHomepage" component = {StudentHomepage}/>
         <Route exact path="/forgotpassword" component = {ForgotPassword}/>
       </Switch>
     </Router>
