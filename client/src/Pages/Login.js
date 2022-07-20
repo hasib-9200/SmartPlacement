@@ -52,7 +52,7 @@ const Login = () =>  {
       } else{
         setIsSubmitted(true);
         localStorage.setItem("isSubmitted", true);
-        window.location.href = '/Homepage';
+        window.location.href = '/StudentHomepage';
       }
     });
 };
