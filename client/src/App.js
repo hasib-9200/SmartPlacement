@@ -14,8 +14,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/agencies" component={AgencyListPage} />
-        {/* <Route exact path="/homepage" component = {Homepage}/>
-        <Route exact path="/forgotpassword" component = {ForgotPassword}/> */}
+        <Route exact path="/homepage" component={Homepage} />
+        <Route exact path="/forgotpassword" component={ForgotPassword} />
       </Switch>
     </Router>
   )
