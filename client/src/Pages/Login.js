@@ -5,28 +5,12 @@ import "../Style/styles.css";
 import { Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from "axios";
-
-// import linq from "linq";
-// import Enumerable from "linq";
-export let database = [
-  {
-    username: "name",
-    password: "password"
-  },
-  {
-    username: "anmstha123@gmail.com",
-    password: "password1"
-  }
-];
-
-
-
+import {MdEmail} from "react-icons/md";
+import {MdLock} from "react-icons/md";
 
 
 const Login = () =>  {
     // React States
-
-    
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [modalShow, setModalShow] = useState(false);
@@ -36,7 +20,7 @@ const Login = () =>  {
     // let history = useHistory();
     // User Login info
     const errors = {
-      pass: "invalid username or password"
+      pass: "Invalid username or password"
     };
 
   const loginUser=(event)=>{
@@ -50,13 +34,25 @@ const Login = () =>  {
         localStorage.setItem("isSubmitted", false);
         setErrorMessages({ name: "pass", message: errors.pass });
       } else{
+
         setIsSubmitted(true);
         localStorage.setItem("isSubmitted", true);
-        window.location.href = '/Homepage';
+        switch(response.data[0].access_lvl){
+          case 1:
+            window.location.href = '/studenthomepage';
+            break;
+          case 2:
+            window.location.href = '/agencyhomepage';
+            break;
+          case 3:
+            window.location.href = '/adminhomepage';
+            break;
+          default:
+            window.location.href = '/';
+        }
       }
     });
 };
-
   
     // Generate JSX code for error message
     const renderErrorMessage = (name) =>
@@ -88,6 +84,9 @@ const Login = () =>  {
           <Button variant="primary" as="input" type="submit" value="Login" />{' '}
           <div className="forgotPassword">
             <a href="/forgotpassword">Forgot Password?</a>
+          </div>
+          <div className="agencyForm">
+            <a href="/agencyaccountrequest">Agency Verification Form</a>
           </div>
           <br/>
           <div class="col-md-12 text-center">

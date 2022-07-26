@@ -30,25 +30,11 @@ const ForgotPassword = () => {
         history.push("/")
     }
 
-
-    const [username, setUserName] = useState([]);
-    const [password, setPassword] = useState([]);
+    const [username, setUserName] = useState("");
+    const [password1, setPassword1] = useState("false");
+    const [password, setPassword] = useState("false");
     const [error, setError] = useState(false);
     
-//   const loginUser=(event)=>{
-//     event.preventDefault();
-//     Axios.post("http://localhost:3001/finduser",{
-//       username:username
-//     }).then((response)=>{
-//       if(response.data.message){
-//         console.log(response.data.message);
-//         setError(false);
-//       } else{
-//           setError(true);
-//       }
-//     });
-// };
-
 const loginUser=(event)=>{
   event.preventDefault();
   Axios.post("/finduser",{
@@ -65,21 +51,25 @@ const loginUser=(event)=>{
 
 const changePassword=(event)=>{
   event.preventDefault();
+  if(password1 !== password){
+    setError(true);
+    alert("passwords dont match");
+    return;
+  }
   Axios.post("/changePassword",{
     username:username,
     password:password
   }).then((response)=>{
     if(response.data.message){
       console.log(response.data.message);
-      setError(false);
     } else{
-        setError(true);
     }
   });
+  window.location.href = '/';
 };
 
 const renderForm = (
-    <div className="form" style={formStyle}>
+    <div style={formStyle}>
     <Form onSubmit={loginUser}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label style={{fontWeight:'bold', fontSize:'20px'}}>Find Your Account</Form.Label>
@@ -102,15 +92,16 @@ const renderForm = (
 );
 
 const renderSearch = (
-    <div className="form" style={formStyleSearch}>
+    <div style={formStyleSearch}>
     <Form onSubmit={changePassword}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label style={{fontWeight:'bold', fontSize:'20px'}}>Find Your Account</Form.Label>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label style={{fontWeight:'bold', fontSize:'20px'}}>Reset Your Password</Form.Label>
             <br/>
             <p>Please enter your new password</p>
-            <Form.Control type="text" placeholder="New Password"  onChange={(e)=>{
+            <input type="password" placeholder="New Password" style={{width: "27rem"}} onChange={(e)=>{
+          setPassword1(e.target.value);}}/>
+            <Form.Control style={{marginTop:"10px"}} type="password" placeholder="Confirm Password" onChange={(e)=>{
           setPassword(e.target.value);}}/>
-            <Form.Control style={{marginTop:"10px"}} type="text" placeholder="Confirm Password" />
         </Form.Group>
         <Button variant="primary" onClick={cancle}>
             Cancle

@@ -45,7 +45,7 @@ input[type="password"] {
 .login-form {
   /* position: absolute; */
   width: 400px;
-  height: 420px;
+  height: 440px;
 
   border-radius: 10px;
   background-color: white;
@@ -116,5 +116,16 @@ input[type="text"] > .mb-3 {
   border-color: #246d15;
 }
 
-.flex-item {
+.agencyForm > a {
+  font-size: 17px;
+  color: #0d6efd;
+  position: relative;
+  left: 25%;
+  top: 10px;
+  text-decoration: none;
+  padding-bottom: 20px;
+}
+
+.agencyForm > a:hover {
+  text-decoration: underline;
 }
