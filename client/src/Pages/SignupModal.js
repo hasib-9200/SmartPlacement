@@ -17,9 +17,10 @@ const SignupModal = (props) => {
       const [username, setUserName]=useState("");
       const [password, setPassword]=useState("");
       const [accessLevel, setAccessLevel] = useState("1");
+      const [error, setError] = useState(false);
 
-      const addUsers=()=>{
-        
+      const addUsers=(event)=>{
+        event.preventDefault();
           Axios.post("/register",{
               firstName:firstName,
               lastName:lastName,
@@ -27,8 +28,13 @@ const SignupModal = (props) => {
               password:password,
               accessLevel:accessLevel
             }).then((response)=>{
-                console.log(response);
-            });
+                if(response.data.err){
+                    setError(true);
+                }else{
+                    setError(false);
+                    window.location.href='/';
+                }
+            })
       };        
 
     return (
@@ -80,6 +86,9 @@ const SignupModal = (props) => {
             <option value="2">Agency</option>
             <option value="3">Administrator</option>
         </Form.Select>
+        <div style={{color:"red"}}>
+          {!error?"":"Email address already exists"}
+        </div>
         <br/>
         <div className="d-grid">
             <button onClick={addUsers} onMouseOver={hover} onMouseLeave={hoverStop}  className="btn btn-primary" style={{background:"#0d6efd", border:"#0d6efd"}}>
